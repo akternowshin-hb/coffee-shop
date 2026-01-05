@@ -69,6 +69,8 @@ flutter:
     - assets/images/coffee7.jpg
     - assets/images/coffee8.jpg
     - assets/images/coffee9.jpg
+    - assets/images/coffee10.jpg
+    - assets/images/coffee11.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
