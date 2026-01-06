@@ -309,7 +309,7 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 2.1,
+                  childAspectRatio: 1.8,
                 ),
                 itemCount: coffeeItems.length,
                 itemBuilder: (context, index) {
@@ -319,7 +319,8 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CoffeeDetailScreen(coffeeData: item),
+                          builder: (context) =>
+                              CoffeeDetailScreen(coffeeData: item),
                         ),
                       );
                     },
