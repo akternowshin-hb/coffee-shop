@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'screen/home.dart';
 import 'routes/app_routes.dart';
+import 'providers/cart_provider.dart';
 
 void main() {
   runApp(const CoffeeShopApp());
@@ -11,15 +13,18 @@ class CoffeeShopApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Coffee Shop',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-        fontFamily: 'Sora',
-        scaffoldBackgroundColor: Colors.black,
+    return ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: MaterialApp(
+        title: 'Coffee Shop',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.brown,
+          fontFamily: 'Sora',
+          scaffoldBackgroundColor: Colors.black,
+        ),
+        routes: AppRoutes.routes,
       ),
-      routes: AppRoutes.routes,
     );
   }
 }

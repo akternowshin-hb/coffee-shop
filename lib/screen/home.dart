@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'details.dart';
+import 'cart.dart';
+import '../providers/cart_provider.dart';
 
 void main() {
   runApp(const CoffeeShopApp());
@@ -32,6 +35,7 @@ class CoffeeHomeScreen extends StatefulWidget {
 
 class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
   int selectedCategoryIndex = 0;
+  int _selectedBottomNavIndex = 0;
 
   final List<String> categories = [
     'All Coffee',
@@ -355,10 +359,20 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           type: BottomNavigationBarType.fixed,
+          currentIndex: _selectedBottomNavIndex,
           selectedItemColor: const Color(0xFFC67C4E),
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          onTap: (index) {
+            setState(() {
+              _selectedBottomNavIndex = index;
+            });
+            if (index == 2) {
+              // Navigate to cart
+              Navigator.pushNamed(context, '/cart');
+            }
+          },
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(

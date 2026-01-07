@@ -5,7 +5,8 @@
       "Bash(mkdir:*)",
       "Bash(flutter doctor:*)",
       "Bash(flutter run:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(flutter pub add:*)"
     ]
   }
 }

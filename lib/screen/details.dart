@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/cart_provider.dart';
+import '../models/cart_item.dart';
 
 class CoffeeDetailScreen extends StatefulWidget {
   final Map<String, dynamic> coffeeData;
@@ -542,7 +545,30 @@ class _CoffeeDetailScreenState extends State<CoffeeDetailScreen> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    // Add to cart functionality
+                    // Get selected options
+                    String size = selectedSizeIndex == 0 ? 'S' : (selectedSizeIndex == 1 ? 'M' : 'L');
+                    String temperature = selectedTempIndex == 0 ? 'Hot' : 'Ice';
+                    String sugarLevel = selectedSugarIndex == 0 ? 'Normal' : (selectedSugarIndex == 1 ? '50% Less' : 'No Sugar');
+                    String serviceType = selectedServiceIndex == 0 ? 'Dine In' : 'Take Away';
+
+                    // Create cart item
+                    CartItem cartItem = CartItem(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      name: widget.coffeeData['name'] ?? 'Cappuccino',
+                      category: widget.coffeeData['category'] ?? 'Ice/Hot',
+                      image: widget.coffeeData['image'] ?? 'assets/images/coffee4.jpg',
+                      price: totalPrice / quantity, // Base price per item
+                      size: size,
+                      temperature: temperature,
+                      sugarLevel: sugarLevel,
+                      serviceType: serviceType,
+                      quantity: quantity,
+                    );
+
+                    // Add to cart
+                    Provider.of<CartProvider>(context, listen: false).addItem(cartItem);
+
+                    // Show success message
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -550,6 +576,13 @@ class _CoffeeDetailScreenState extends State<CoffeeDetailScreen> {
                         ),
                         duration: const Duration(seconds: 2),
                         backgroundColor: const Color(0xFFC67C4E),
+                        action: SnackBarAction(
+                          label: 'VIEW CART',
+                          textColor: Colors.white,
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/cart');
+                          },
+                        ),
                       ),
                     );
                   },
